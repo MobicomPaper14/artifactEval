@@ -156,14 +156,19 @@ class ManagerParallel(IManager):
         
         # Check the node information type using the infoType argument with switch case
         _nodeInfo = None
-        match _infoType:
-            case "time":
-                _nodeInfo = _node.timestamp.copy()
-            case "position":
-                _nodeInfo = _node.get_Position()
-            case _:
-                raise Exception(f"[API: get_NodeInfo]: The information type {_infoType} is not supported")
-
+        #match _infoType:
+        #    case "time":
+        #        _nodeInfo = _node.timestamp.copy()
+        #    case "position":
+        #        _nodeInfo = _node.get_Position()
+        #    case _:
+        #        raise Exception(f"[API: get_NodeInfo]: The information type {_infoType} is not supported")
+        if (_infoType == "time"):
+            _nodeInfo = _node.timestamp.copy()
+        elif (_infoType == "position"):
+            _nodeInfo = _node.get_Position()
+        else:
+            raise Exception(f"[API: get_NodeInfo]: The information type {_infoType} is not supported")
         return _nodeInfo
 
     def __pause_AtTime(self, **_kwargs):
